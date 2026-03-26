@@ -104,7 +104,25 @@ async def form(message: types.Message):
 
         await bot.send_message(ADMIN_ID, text)
         await message.answer("Спасибо! Менеджер свяжется с вами.", reply_markup=menu)
+        
         del user_data[uid]
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
+
+import os
+import threading
+from http.server import HTTPServer, BaseHTTPRequestHandler
+
+class Handler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b'Bot is running')
+
+def run_web():
+    port = int(os.environ.get("PORT", 10000))
+    server = HTTPServer(("0.0.0.0", port), Handler)
+    server.serve_forever()
+
+threading.Thread(target=run_web).start()
