@@ -4,8 +4,9 @@ import logging
 from aiogram import Bot, Dispatcher, types
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.utils import executor
+import os
 
-TOKEN = "8713922396:AAFl_HrgthIGQacxkXjbgTEo5T6usEtBDNY"
+TOKEN = os.getenv("BOT_TOKEN")
 ADMIN_ID = 471578666
 
 logging.basicConfig(level=logging.INFO)
